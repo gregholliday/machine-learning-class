@@ -21,14 +21,15 @@ grad = zeros(size(theta));
 
 
 
+H_theta = X * theta;
 
+J = 1/(2*m) * (H_theta - y)' * (H_theta - y) + ...
+   (lambda/(2*m)) * norm(theta([2:end]))^2;
 
+G = (lambda/m) .* theta;
+G(1) = 0; % extra term for gradient
 
-
-
-
-
-
+grad = ((1/m) .* X' * (H_theta - y)) + G;
 
 % =========================================================================
 
